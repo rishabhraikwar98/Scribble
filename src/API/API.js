@@ -5,4 +5,8 @@ export const API = {
         login:base_url+"/auth/login",
         signup:base_url+"/auth/signup"
     },
+    Image_Upload:base_url+"/upload",
+    Profile:{
+        myProfile:base_url+"/profile/me"
+    }
 }
