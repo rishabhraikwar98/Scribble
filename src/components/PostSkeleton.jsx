@@ -13,7 +13,7 @@ const PostSkeleton = () => {
         </div>
         {/* Post image */}
         <div className="mb-4 flex justify-center">
-          <Skeleton className="rounded-lg" width={620} height={250} />
+          <Skeleton className="rounded-lg" width={550} height={260} />
         </div>
         {/* Post title */}
         <div className="mb-2">
@@ -44,7 +44,7 @@ const PostSkeleton = () => {
         </div>
         {/* Post image */}
         <div className="mb-4 flex justify-center">
-          <Skeleton className="rounded-lg" width={620} height={250} />
+          <Skeleton className="rounded-lg" width={550} height={260} />
         </div>
         {/* Post title */}
         <div className="mb-2">
