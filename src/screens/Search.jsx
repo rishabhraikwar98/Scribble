@@ -35,11 +35,7 @@ function Search() {
         params: params,
       });
       setLoading(false);
-      setProfiles([
-        ...res.data.profiles,
-        ...res.data.profiles,
-        ...res.data.profiles,
-      ]);
+      setProfiles(res.data.profiles);
     } catch (error) {
       toast.error("Please Try Again Later !");
       setLoading(false);
