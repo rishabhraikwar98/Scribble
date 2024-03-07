@@ -11,6 +11,7 @@ export const API = {
     userProfile:base_url+"/profile/:userId",// GET
     follow: base_url + "/profile/follow/:userId", // PATCH
     unfollow: base_url + "/profile/unfollow/:userId", // PATCH
+    searchProfiles: base_url+ "/profile/search" //GET
   },
   Posts: {
     allPosts: base_url + "/post/:userId/all",// GET
