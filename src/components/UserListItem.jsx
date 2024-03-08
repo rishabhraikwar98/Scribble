@@ -18,10 +18,8 @@ function UserListItem({ user, isFollowing, followUser, unfollowUser,loading}) {
           <img
             alt="avatar"
             onClick={handleRedirect}
-            className={`lg:w-14 w-12 rounded-full ${
-              !user.avatar && "opacity-60"
-            }`}
-            src={!user.avatar ? no_user : user.avatar}
+            className="lg:w-14 w-12 rounded-full"
+            src={user.avatar || no_user}
           />
         </div>
         <div
@@ -39,14 +37,14 @@ function UserListItem({ user, isFollowing, followUser, unfollowUser,loading}) {
         {isFollowing(user._id) ? (
           <button
             onClick={() => unfollowUser(user._id)}
-            className="bg-gray-200 hover:bg-gray-300 rounded-lg lg:text-sm text-xs font-medium px-3 py-2"
+            className="bg-gray-200 hover:bg-gray-300 rounded-lg lg:text-sm text-xs font-medium px-3 py-2 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500"
           >
             Unfollow
           </button>
         ) : (
           <button
             onClick={() => followUser(user._id)}
-            className="bg-blue-600 hover:bg-blue-700 rounded-lg lg:text-sm text-xs text-white font-medium px-5 py-2"
+            className="bg-blue-600 hover:bg-blue-700 rounded-lg lg:text-sm text-xs text-white font-medium px-5 py-2 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-blue-700"
           >
             Follow
           </button>

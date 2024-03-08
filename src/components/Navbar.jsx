@@ -68,10 +68,8 @@ function Navbar() {
               <img
                 alt="my photo"
                 draggable="false"
-                src={myProfile && myProfile.avatar ? myProfile.avatar : no_user}
-                className={`w-[38px] rounded-full border-2 border-gray-400 ${
-                  !myProfile.avatar && "opacity-50"
-                }`}
+                src={myProfile && myProfile.avatar|| no_user}
+                className="w-[38px] rounded-full"
               />
             </div>
           </button>

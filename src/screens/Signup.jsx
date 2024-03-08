@@ -3,8 +3,7 @@ import validator from "validator";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API/API";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast} from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
 import BlockUi from "react-block-ui";
@@ -59,7 +58,6 @@ function Signup() {
 
   return (
     <div>
-      <ToastContainer position="bottom-center" autoClose={4000} newestOnTop />
       <BlockUi tag="div" blocking={loading}>
         <div className="flex justify-center items-center h-screen bg-gray-100">
           <div className="bg-white lg:p-8 px-8 py-6 rounded-xl shadow-md lg:w-96 w-80 ">

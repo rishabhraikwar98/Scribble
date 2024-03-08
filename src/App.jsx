@@ -9,18 +9,22 @@ import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import Home from "./screens/Home";
 import MyProfile from "./screens/MyProfile";
+import UserProfile from "./screens/UserProfile";
+import Search from "./screens/Search";
+import Settings from "./screens/Settings";
 import Notifications from "./screens/Notifications";
 import Layout from "./components/Layout";
 import PrivateRoutes from "./routes/privateRoutes";
 import { AuthProvider } from "./context/AuthContext";
-import Search from "./screens/Search";
-import Settings from "./screens/Settings";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SkeletonTheme } from "react-loading-skeleton";
-import UserProfile from "./screens/UserProfile";
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <AuthProvider>
+      <ToastContainer position="bottom-center" pauseOnHover={false} autoClose={3000}/>
       <SkeletonTheme baseColor="#f3f3f3" highlightColor="#D3D3D3">
       <Router>
         <Routes>

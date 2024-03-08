@@ -11,8 +11,8 @@ import Modal from "../components/Modal";
 import UserListItem from "../components/UserListItem";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 function MyProfile() {
   const { token } = useAuth();
   const [myProfile, setMyProfile] = useState(null);
@@ -31,7 +31,7 @@ function MyProfile() {
       const res = await axios.get(API.Profile.myProfile);
       setMyProfile(res.data.myProfile);
     } catch (error) {
-      toast.error("Please Try Again Later !")
+      toast.error("Please Try Again Later !");
     }
   };
   const getAllPosts = async () => {
@@ -42,7 +42,7 @@ function MyProfile() {
       setPosts(res.data.posts);
       setLoadingPosts(false);
     } catch (error) {
-      toast.error("Please Try Again Later !")
+      toast.error("Please Try Again Later !");
     }
   };
   const closeModal = () => {
@@ -52,8 +52,11 @@ function MyProfile() {
     setTitle(title);
     setShowModal(true);
   };
+
+  // profile actions
   const isFollowing = (id) => {
-    if (myProfile.following.filter((user) => {
+    if (
+      myProfile.following.filter((user) => {
         return user._id === id;
       }).length
     ) {
@@ -69,10 +72,9 @@ function MyProfile() {
       await getMyProfile();
       setLoading(false);
     } catch (error) {
-      toast.error("Please Try Again Later !")
+      toast.error("Please Try Again Later !");
     }
   };
-
   const unfollowUser = async (id) => {
     try {
       setLoading(true);
@@ -81,73 +83,58 @@ function MyProfile() {
       await getMyProfile();
       setLoading(false);
     } catch (error) {
-      toast.error("Please Try Again Later !")
-    }
-  };
-  const handleLikePost = async (postId) => {
-    const URI = API.Posts.like.replace(":postId", postId);
-    try {
-      await axios.post(URI);
-      await getAllPosts();
-    } catch (error) {
-      toast.error("Please Try Again Later !")
-    }
-  };
-  const handleUnlikePost = async (postId) => {
-    const URI = API.Posts.like.replace(":postId", postId);
-    try {
-      await axios.delete(URI);
-      await getAllPosts();
-    } catch (error) {
-      toast.error("Please Try Again Later !")
-    }
-  };
-  const handleDeletePost = async (postId) => {
-    const URI = API.Posts.deletePost.replace(":postId", postId);
-    try {
-      await axios.delete(URI);
-      await getAllPosts();
-      toast.info("Post Deleted !")
-    } catch (error) {
-      toast.error("Please Try Again Later !")
+      toast.error("Please Try Again Later !");
     }
   };
 
   return (
     <div className="layout scroll scroll-smooth">
       {/* Followers/Following Modal */}
-      <ToastContainer position="bottom-center" autoClose={4000} newestOnTop />
       <Modal title={title} isOpen={showModal} onClose={closeModal}>
-        <BlockUi blocking={loading} tag="div">
-        {title==="Followers"&&!myProfile.followers.length?<p className="text-center font-medium mt-5 lg:text-lg text-base text-gray-500">No Followers</p>:"" }
-        {title==="Following"&&!myProfile.following.length?<p className="text-center font-medium mt-5 lg:text-lg text-base text-gray-500">Following No One</p>:"" }
-          {title === "Followers" &&
-            myProfile.followers.map((user) => {
-              return (
-                <UserListItem
-                  key={user._id}
-                  followUser={followUser}
-                  unfollowUser={unfollowUser}
-                  user={user}
-                  isFollowing={isFollowing}
-                  loading={loading}
-                />
-              );
-            })}
-          {title === "Following" &&
-            myProfile.following.map((user) => {
-              return (
-                <UserListItem
-                  key={user._id}
-                  followUser={followUser}
-                  unfollowUser={unfollowUser}
-                  user={user}
-                  isFollowing={isFollowing}
-                  loading={loading}
-                />
-              );
-            })}
-        </BlockUi>
+        <div className="overflow-y-auto lg:max-h-96 max-h-80">
+          <BlockUi blocking={loading} tag="div">
+            {title === "Followers" && !myProfile.followers.length ? (
+              <p className="text-center font-medium mt-5 lg:text-lg text-base text-gray-500">
+                No Followers
+              </p>
+            ) : (
+              ""
+            )}
+            {title === "Following" && !myProfile.following.length ? (
+              <p className="text-center font-medium mt-5 lg:text-lg text-base text-gray-500">
+                Following No One
+              </p>
+            ) : (
+              ""
+            )}
+            {title === "Followers" &&
+              myProfile.followers.map((user) => {
+                return (
+                  <UserListItem
+                    key={user._id}
+                    followUser={followUser}
+                    unfollowUser={unfollowUser}
+                    user={user}
+                    isFollowing={isFollowing}
+                    loading={loading}
+                  />
+                );
+              })}
+            {title === "Following" &&
+              myProfile.following.map((user) => {
+                return (
+                  <UserListItem
+                    key={user._id}
+                    followUser={followUser}
+                    unfollowUser={unfollowUser}
+                    user={user}
+                    isFollowing={isFollowing}
+                    loading={loading}
+                  />
+                );
+              })}
+          </BlockUi>
+        </div>
       </Modal>
       {/* profile */}
       <div className="box lg:mx-72 mx:20 lg:mt-12 mt-5">
@@ -157,10 +144,8 @@ function MyProfile() {
               <img
                 draggable="false"
                 alt="avatar"
-                src={myProfile.avatar ? myProfile.avatar : no_user}
-                className={`lg:w-24 w-16 rounded-full ${
-                  !myProfile.avatar && "opacity-60"
-                }`}
+                src={ myProfile.avatar || no_user}
+                className="lg:w-24 w-16 rounded-full"
               />
             ) : (
               <Skeleton circle width={100} height={100} />
@@ -229,13 +214,7 @@ function MyProfile() {
               <NoPosts />
             ) : (
               posts.map((post) => (
-                <Post
-                  key={post.title}
-                  post={post}
-                  handleLikePost={handleLikePost}
-                  handleUnlikePost={handleUnlikePost}
-                  handleDeletePost={handleDeletePost}
-                />
+                <Post key={post.title} post={post} refresh={getAllPosts} />
               ))
             )}
           </div>

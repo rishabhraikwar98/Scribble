@@ -9,15 +9,15 @@ function Modal({ title, isOpen, onClose,children }) {
     <div
       className={`fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50`}
     >
-      <div className="lg:w-[500px] w-[360px] bg-gray-50 lg:h-2/3 h-1/2 rounded-xl">
+      <div className="lg:w-[500px] w-[360px] bg-gray-100 lg:h-2/3 h-1/2 rounded-xl">
         {/* Content of the modal */}
         <div className="lg:py-4.5 py-4 px-6 border-b border-gray-300 flex align-center justify-between shadow-sm">
-          <h1 className="text-xl font-bold">{title}</h1>
-          <button onClick={onClose}>
+          <h1 className="text-xl font-bold text-gray-800">{title}</h1>
+          <button className="text-sm" onClick={onClose}>
             <Icon size={24} icon={AiOutlineClose} color={iconColor} />
           </button>
         </div>
-        <div className="modal-body overflow-y-auto lg:max-h-96 max-h-80 py-5 bg-gray-50">
+        <div className="modal-body py-5">
           {children}
         </div>
       </div>

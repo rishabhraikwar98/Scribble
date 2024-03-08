@@ -12,8 +12,7 @@ import UserListItem from "../components/UserListItem";
 import { useParams } from "react-router-dom";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 function UserProfile() {
   const { token } = useAuth();
   const { userId } = useParams();
@@ -74,6 +73,8 @@ function UserProfile() {
     }
     return false;
   };
+
+  // profile actions
   const followUser = async (id) => {
     try {
       setLoading(true);
@@ -100,29 +101,11 @@ function UserProfile() {
       toast.error("Please Try Again Later !");
     }
   };
-  const handleLikePost = async (postId) => {
-    const URI = API.Posts.like.replace(":postId", postId);
-    try {
-      await axios.post(URI);
-      await getAllPosts();
-    } catch (error) {
-      toast.error("Please Try Again Later !");
-    }
-  };
-  const handleUnlikePost = async (postId) => {
-    const URI = API.Posts.like.replace(":postId", postId);
-    try {
-      await axios.delete(URI);
-      await getAllPosts();
-    } catch (error) {
-      toast.error("Please Try Again Later !");
-    }
-  };
   return (
     <div className="layout scroll-smooth">
       {/* Followers/Following Modal */}
-      <ToastContainer position="bottom-center" autoClose={3000} newestOnTop />
       <Modal title={title} isOpen={showModal} onClose={closeModal}>
+        <div className="overflow-y-auto lg:max-h-96 max-h-80">
         {<BlockUi blocking={loading} tag="div">
           <div>
             {title==="Followers"&&!userProfile.followers.length?<p className="text-center font-medium mt-5 lg:text-lg text-base text-gray-500">No Followers</p>:"" }
@@ -153,6 +136,7 @@ function UserProfile() {
               })}
           </div>
         </BlockUi>}
+        </div>
       </Modal>
       {/* profile */}
       <BlockUi blocking={loading} tag="div">
@@ -163,10 +147,8 @@ function UserProfile() {
                 <img
                   draggable="false"
                   alt="avatar"
-                  src={userProfile.avatar ? userProfile.avatar : no_user}
-                  className={`lg:w-24 w-16 rounded-full ${
-                    !userProfile.avatar && "opacity-60"
-                  }`}
+                  src={userProfile.avatar || no_user}
+                  className="lg:w-24 w-16 rounded-full"
                 />
               ) : (
                 <Skeleton circle width={100} height={100} />
@@ -226,14 +208,14 @@ function UserProfile() {
               {myProfile && !isFollowing(userProfile._id) ? (
                 <button
                   onClick={() => followUser(userId)}
-                  className="bg-blue-600 hover:bg-blue-700 text-md text-white font-semibold px-6 py-1.5 rounded-lg border border-blue-700 w-11/12 lg:w-auto"
+                  className="bg-blue-600 hover:bg-blue-700 text-md text-white font-semibold px-6 py-1.5 rounded-lg w-11/12 lg:w-auto focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-blue-700"
                 >
                   Follow
                 </button>
               ) : (
                 <button
                   onClick={() => unfollowUser(userId)}
-                  className="bg-gray-200 hover:bg-gray-300 text-md font-semibold px-6 py-1.5 rounded-lg border border-gray-300 w-11/12 lg:w-auto"
+                  className="bg-gray-200 hover:bg-gray-300 text-md font-semibold px-6 py-1.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-11/12 lg:w-auto"
                 >
                   Unfollow
                 </button>
@@ -261,8 +243,7 @@ function UserProfile() {
                   <Post
                     key={post.title}
                     post={post}
-                    handleLikePost={handleLikePost}
-                    handleUnlikePost={handleUnlikePost}
+                    refresh={getAllPosts}
                   />
                 ))
               )}

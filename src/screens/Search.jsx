@@ -4,8 +4,7 @@ import { API } from "../API/API";
 import { useNavigate } from "react-router-dom";
 import Icon from "../components/Icon";
 import { MdOutlineClear } from "react-icons/md";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast} from "react-toastify";
 import no_user from "../assets/no_user.png";
 import Loading from "react-loading";
 function Search() {
@@ -44,7 +43,6 @@ function Search() {
 
   return (
     <>
-      <ToastContainer position="bottom-center" autoClose={4000} newestOnTop />
       <div className="search flex justify-center">
         <div className="lg:w-5/12 w-11/12">
           <div className="lg:mt-8 mt-6 lg:py-6 py-4 w-full">
