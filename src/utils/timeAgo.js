@@ -13,10 +13,10 @@ export const timeAgo = (timestamp) => {
     const day = String(date.getDate());
     return `${day} ${month} ${year}`;
   } else if (hours > 0) {
-    return `${hours} hours ago`;
+    return `${hours} ${hours<2?"hour":"hours"} ago`;
   } else if (minutes > 0) {
-    return `${minutes} minutes ago`;
+    return `${minutes} ${minutes<2?"minute":"minutes"} ago`;
   } else {
-    return `${seconds} seconds ago`;
+    return `${seconds} ${seconds<2?"second":"seconds"} ago`;
   }
 };

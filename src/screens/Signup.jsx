@@ -3,11 +3,15 @@ import validator from "validator";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API/API";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
 import BlockUi from "react-block-ui";
+import Icon from "../components/Icon/Icon";
+import { LuEye } from "react-icons/lu";
+import { LuEyeOff } from "react-icons/lu";
 function Signup() {
+  const iconColor = "rgb(55 65 81)";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
@@ -19,6 +23,7 @@ function Signup() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const handleSignup = async () => {
     if (!name.trim().length) {
       setNameError(true);
@@ -146,19 +151,32 @@ function Signup() {
               >
                 Password
               </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                className={`w-full p-2 border-2 rounded-md focus:outline-none ${
-                  passwordError ? "border-red-600" : "border-gray-300"
-                }`}
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError(false);
-                }}
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className={`w-full p-2 border-2 rounded-md focus:outline-none ${
+                    passwordError ? "border-red-600" : "border-gray-300"
+                  }`}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError(false);
+                  }}
+                />
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-3 right-3"
+                >
+                  {!showPassword && (
+                    <Icon color={iconColor} size={20} icon={LuEye} />
+                  )}
+                  {showPassword && (
+                    <Icon color={iconColor} size={20} icon={LuEyeOff} />
+                  )}
+                </button>
+              </div>
               {passwordError && (
                 <p className="text-xs text-right">
                   Password must be 8 characters !

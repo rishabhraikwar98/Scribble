@@ -1,11 +1,13 @@
 import React from "react";
-import no_user from "../assets/no_user.png";
+import no_user from "../../assets/no_user.png";
 import { useNavigate } from "react-router-dom";
-function UserListItem({ user, isFollowing, followUser, unfollowUser,loading}) {
-  const myId = localStorage.getItem("userId");
+import { useContext } from "react";
+import { ProfileContext } from "../../context/ProfileContext";
+function UserListItem({ user, isFollowing, followUser, unfollowUser}) {
+  const {myProfile} = useContext(ProfileContext)
   const navigate = useNavigate();
   const handleRedirect = () => {
-    if (user._id === myId) {
+    if (user._id === myProfile._id) {
       navigate(`/profile/me`);
     } else {
       navigate(`/profile/${user._id}/${user.user_name}`);
@@ -33,7 +35,7 @@ function UserListItem({ user, isFollowing, followUser, unfollowUser,loading}) {
         </div>
       </div>
       <div className="action flex justify-center w-1/3">
-        {user._id!==myId?<div> 
+        {user._id!==myProfile._id?<div> 
         {isFollowing(user._id) ? (
           <button
             onClick={() => unfollowUser(user._id)}

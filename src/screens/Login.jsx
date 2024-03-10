@@ -7,8 +7,11 @@ import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
 import BlockUi from "react-block-ui";
-
+import Icon from "../components/Icon/Icon";
+import { LuEye } from "react-icons/lu";
+import { LuEyeOff } from "react-icons/lu";
 function Login() {
+  const iconColor = "rgb(55 65 81)";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -16,6 +19,7 @@ function Login() {
   const navigate = useNavigate();
   const { login, token } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     if (token) {
       navigate("/home");
@@ -35,9 +39,9 @@ function Login() {
       password,
     };
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.post(API.Auth.login, payload);
-      setLoading(false)
+      setLoading(false);
       toast.success("Login Successfull !");
       login(res.data.access_token);
       setTimeout(() => {
@@ -89,19 +93,25 @@ function Login() {
               >
                 Password
               </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                className={`w-full p-2 border-2 rounded-md focus:outline-none ${
-                  passwordError ? "border-red-600" : "border-gray-300"
-                }`}
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError(false);
-                }}
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword?"text":"password"}
+                  placeholder="Enter your password"
+                  className={`w-full p-2 border-2 rounded-md focus:outline-none ${
+                    passwordError ? "border-red-600" : "border-gray-300"
+                  }`}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError(false);
+                  }}
+                />
+                <button onClick={()=>setShowPassword(!showPassword)} className="absolute top-3 right-3">
+                  {!showPassword && <Icon color={iconColor} size={20} icon={LuEye}/>}
+                  {showPassword && <Icon color={iconColor} size={20} icon={LuEyeOff} />}
+                </button>
+              </div>
               {passwordError && (
                 <p className="text-xs text-right">
                   Password must be 8 characters !

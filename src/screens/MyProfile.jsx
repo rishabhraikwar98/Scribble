@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { useAuth } from "../context/AuthContext";
 import { API } from "../API/API";
 import axios from "axios";
-import Post from "../components/Post";
+import Post from "../components/Post/Post";
 import no_user from "../assets/no_user.png";
 import Skeleton from "react-loading-skeleton";
-import NoPosts from "../components/NoPosts";
-import PostSkeleton from "../components/PostSkeleton";
-import Modal from "../components/Modal";
-import UserListItem from "../components/UserListItem";
+import NoPosts from "../components/Post/NoPosts";
+import PostSkeleton from "../components/Post/PostSkeleton";
+import Modal from "../components/Modal/Modal";
+import UserListItem from "../components/UserList/UserListItem";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import { toast } from "react-toastify";
-
+import { ProfileContext } from "../context/ProfileContext";
 function MyProfile() {
   const { token } = useAuth();
-  const [myProfile, setMyProfile] = useState(null);
+  const {myProfile,setMyProfile} = useContext(ProfileContext)
   const [posts, setPosts] = useState([]);
-  const [loadingPosts, setLoadingPosts] = useState(true);
   const [showModal, setShowModal] = React.useState(false);
   const [title, setTitle] = useState("");
+  const [loadingPosts, setLoadingPosts] = useState(true);
+  const [loadingProfile,setLoadingProfile] =useState(true)
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -28,15 +29,16 @@ function MyProfile() {
   }, []);
   const getMyProfile = async () => {
     try {
+      setLoadingProfile(true)
       const res = await axios.get(API.Profile.myProfile);
+      setLoadingProfile(false)
       setMyProfile(res.data.myProfile);
     } catch (error) {
       toast.error("Please Try Again Later !");
     }
   };
   const getAllPosts = async () => {
-    const id = localStorage.getItem("userId");
-    let URI = API.Posts.allPosts.replace(":userId", id);
+    let URI = API.Posts.allPosts.replace(":userId", myProfile._id);
     try {
       const res = await axios.get(URI);
       setPosts(res.data.posts);
@@ -102,7 +104,7 @@ function MyProfile() {
             )}
             {title === "Following" && !myProfile.following.length ? (
               <p className="text-center font-medium mt-5 lg:text-lg text-base text-gray-500">
-                Following No One
+                Following None
               </p>
             ) : (
               ""
@@ -140,7 +142,7 @@ function MyProfile() {
       <div className="box lg:mx-72 mx:20 lg:mt-12 mt-5">
         <div className="info flex items-center gap-5 mx-5">
           <div className="avatar">
-            {myProfile ? (
+            {!loadingProfile ? (
               <img
                 draggable="false"
                 alt="avatar"
@@ -153,21 +155,21 @@ function MyProfile() {
           </div>
           <div className="name">
             <p className="font-medium text-xl lg:text-2xl mb-.5">
-              {myProfile ? (
+              {!loadingProfile ? (
                 myProfile.name
               ) : (
                 <Skeleton style={{ width: "150px" }} />
               )}
             </p>
             <p className="font-medium text-gray-500 text-md lg:text-lg">
-              {myProfile ? "@" + myProfile.user_name : <Skeleton />}
+              {!loadingProfile ? "@" + myProfile.user_name : <Skeleton />}
             </p>
           </div>
         </div>
         <div className="stats flex justify-between lg:gap-16 lg:mx-10 mx-12 text-center mt-5 lg:absolute lg:right-80 lg:top-28">
           <div className="p-1">
             <p className="lg:text-2xl text-xl font-medium">
-              {myProfile ? myProfile.total_posts : <Skeleton />}
+              {!loadingProfile ? myProfile.total_posts : <Skeleton />}
             </p>
             <p className="lg:text-lg text-base text-gray-600 font-medium">
               Posts
@@ -178,7 +180,7 @@ function MyProfile() {
             className="p-1 ml-4 cursor-pointer"
           >
             <p className="lg:text-2xl text-xl font-medium">
-              {myProfile ? myProfile.followers.length : <Skeleton />}
+              {!loadingProfile ? myProfile.followers.length : <Skeleton />}
             </p>
             <p className="lg:text-lg text-base text-gray-600 font-medium">
               Followers
@@ -189,7 +191,7 @@ function MyProfile() {
             className="p-1 cursor-pointer"
           >
             <p className="lg:text-2xl text-xl font-medium">
-              {myProfile ? myProfile.following.length : <Skeleton />}
+              {!loadingProfile ? myProfile.following.length : <Skeleton />}
             </p>
             <p className="lg:text-lg text-base text-gray-600 font-medium">
               Following
@@ -200,7 +202,7 @@ function MyProfile() {
           <p className="text-base font-medium">About Me</p>
           <div className="lg:w-11/12 w-full">
             <p className="text-base text-gray-500">
-              {myProfile ? myProfile.bio : <Skeleton />}
+              {!loadingProfile ? myProfile.bio : <Skeleton />}
             </p>
           </div>
         </div>

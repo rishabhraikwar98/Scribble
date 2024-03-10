@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { useAuth } from "../context/AuthContext";
 import { API } from "../API/API";
 import axios from "axios";
-import Post from "../components/Post";
+import Post from "../components/Post/Post";
 import no_user from "../assets/no_user.png";
 import Skeleton from "react-loading-skeleton";
-import NoPostsUser from "../components/NoPostsUser";
-import PostSkeleton from "../components/PostSkeleton";
-import Modal from "../components/Modal";
-import UserListItem from "../components/UserListItem";
+import NoPostsUser from "../components/Post/NoPostsUser";
+import PostSkeleton from "../components/Post/PostSkeleton";
+import Modal from "../components/Modal/Modal";
+import UserListItem from "../components/UserList/UserListItem";
 import { useParams } from "react-router-dom";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import { toast } from "react-toastify";
+import { ProfileContext } from "../context/ProfileContext";
 function UserProfile() {
   const { token } = useAuth();
   const { userId } = useParams();
@@ -21,7 +22,7 @@ function UserProfile() {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [showModal, setShowModal] = React.useState(false);
   const [title, setTitle] = useState("");
-  const [myProfile, setMyProfile] = useState(null);
+  const {myProfile, setMyProfile} = useContext(ProfileContext);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

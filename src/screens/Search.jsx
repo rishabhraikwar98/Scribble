@@ -1,21 +1,22 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { API } from "../API/API";
 import { useNavigate } from "react-router-dom";
-import Icon from "../components/Icon";
+import Icon from "../components/Icon/Icon";
 import { MdOutlineClear } from "react-icons/md";
 import { toast} from "react-toastify";
 import no_user from "../assets/no_user.png";
 import Loading from "react-loading";
+import { ProfileContext } from "../context/ProfileContext";
 function Search() {
   const iconColor = "rgb(55 65 81)";
+  const {myProfile} =useContext(ProfileContext)
   const [profiles, setProfiles] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const myId = localStorage.getItem("userId");
   const navigate = useNavigate();
   const handleRedirect = (user) => {
-    if (user._id === myId) {
+    if (user._id === myProfile._id) {
       navigate(`/profile/me`);
     } else {
       navigate(`/profile/${user._id}/${user.user_name}`);
@@ -71,6 +72,7 @@ function Search() {
                 {profiles.map((p) => {
                   return (
                     <div
+                    key={p._id}
                       onClick={() => {
                         handleRedirect(p);
                       }}

@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Icon from "./Icon";
+import React, { useContext, useEffect, useState } from "react";
+import Icon from "../Icon/Icon";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { AiFillLike } from "react-icons/ai";
 import { LiaComment } from "react-icons/lia";
 import { FiEdit } from "react-icons/fi";
-import { API } from "../API/API";
+import { API } from "../../API/API";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
-import no_user from "../assets/no_user.png";
-import {timeAgo} from "../utils/timeAgo";
-import Modal from "./Modal";
-import CommentSection from "./CommentSection";
-import { toast,} from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
+import no_user from "../../assets/no_user.png";
+import {timeAgo} from "../../utils/timeAgo";
+import Modal from "../Modal/Modal";
+import CommentSection from "../Comment/CommentSection";
+import { toast} from "react-toastify";
+import { ProfileContext } from "../../context/ProfileContext";
 const Post = ({ post, refresh }) => {
   const { token } = useAuth();
-  const userId = localStorage.getItem("userId");
+  const {myProfile} =useContext(ProfileContext)
   const iconColor = "rgb(55 65 81)";
   const [openComments, setOpenComments] = useState(false);
   const { author, image, title, total_comments, liked_by, createdAt } = post;
@@ -122,7 +123,7 @@ const Post = ({ post, refresh }) => {
                   .map((item) => {
                     return item.user;
                   })
-                  .includes(userId)
+                  .includes(myProfile._id)
                   ? handleLikePost(post._id)
                   : handleUnlikePost(post._id);
               }}
@@ -136,7 +137,7 @@ const Post = ({ post, refresh }) => {
                     .map((item) => {
                       return item.user;
                     })
-                    .includes(userId)
+                    .includes(myProfile._id)
                     ? "blue"
                     : iconColor
                 }
@@ -153,11 +154,11 @@ const Post = ({ post, refresh }) => {
             <p className="text-sm lg:text-base font-semibold">Comment</p>
           </button>
           <div className="w-full flex justify-end  lg:gap-8 gap-5 items-center">
-            {author._id === userId && (
+            {author._id === myProfile._id && (
               <>
-                <button>
+                {/* <button>
                   <Icon icon={FiEdit} size={20} color={iconColor} />
-                </button>
+                </button> */}
                 <button onClick={() => handleDeletePost(post._id)}>
                   <Icon icon={RiDeleteBinLine} size={22} color={iconColor} />
                 </button>
