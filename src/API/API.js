@@ -15,12 +15,16 @@ export const API = {
   },
   Posts: {
     allPosts: base_url + "/post/:userId/all", // GET
+    createNewPost: base_url + "/post", // POST
     deletePost: base_url + "/post/:postId", // DELETE
     like: base_url + "/post/:postId/like", // POST | DELETE
   },
   Comments: {
     allComments: base_url + "/post/:postId/comment", //GET
     addComment: base_url + "/post/:postId/comment", // POST
-    deleteComment: base_url+"/post/:postId/comment/:commentId" //DELETE
+    deleteComment: base_url + "/post/:postId/comment/:commentId", //DELETE
+  },
+  Feed: {
+    getFeed: base_url + "/home/feed", //GET
   },
 };

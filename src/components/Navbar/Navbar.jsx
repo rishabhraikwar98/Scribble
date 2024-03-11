@@ -73,7 +73,7 @@ function Navbar() {
             </div>
           </button>
           {menuOpen && (
-            <div className="menu absolute right-2 mt-14 xl:w-40 w-36 bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
+            <div className=" z-50 menu absolute right-2 mt-14 xl:w-40 w-36 bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
               <ul className="lg:py-3 py-2 text-gray-700 font-medium text-md">
                 <li
                   onClick={() => {
@@ -107,7 +107,7 @@ function Navbar() {
           )}
         </div>
       ) : (
-        <ReactLoading type="cylon" color={iconColor} />
+        <ReactLoading type="bubbles" color={iconColor} />
       )}
     </nav>
   );

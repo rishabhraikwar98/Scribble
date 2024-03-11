@@ -28,7 +28,7 @@ function UserListItem({ user, isFollowing, followUser, unfollowUser}) {
           className="name mb-1"
           onClick={handleRedirect}
         >
-          <p className="lg:text-xl text-lg -mb-1 lg:-mb-0.5 font-semibold">{user.user_name}</p>
+          <p className="lg:text-xl text-lg -mb-1 lg:-mb-0.5 font-medium">{user.user_name}</p>
           <p className="lg:text-base text-sm font-medium text-gray-500">
             {user.name}
           </p>

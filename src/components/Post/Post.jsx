@@ -93,7 +93,7 @@ const Post = ({ post, refresh }) => {
             className="w-8 h-8 mr-4 rounded-full"
           />
           <div>
-            <p className="font-semibold">@{author.user_name}</p>
+            <p className="font-medium">@{author.user_name}</p>
           </div>
         </div>
 
@@ -107,7 +107,7 @@ const Post = ({ post, refresh }) => {
         {/* Post title */}
         {title && (
           <p
-            className={`font-semibold mb-2 ${!image ? "text-2xl" : "text-lg"}`}
+            className={`font-medium mb-2 ${!image ? "text-2xl" : "text-lg"}`}
           >
             {title}
           </p>
@@ -142,7 +142,7 @@ const Post = ({ post, refresh }) => {
                     : iconColor
                 }
               />
-              <p className="text-sm lg:text-base font-semibold">Like</p>
+              <p className="text-sm lg:text-base font-medium">Like</p>
             </button>
           }
           <button
@@ -151,7 +151,7 @@ const Post = ({ post, refresh }) => {
           >
             <p>{total_comments}</p>
             <Icon icon={LiaComment} size={24} color={iconColor} />
-            <p className="text-sm lg:text-base font-semibold">Comment</p>
+            <p className="text-sm lg:text-base font-medium">Comment</p>
           </button>
           <div className="w-full flex justify-end  lg:gap-8 gap-5 items-center">
             {author._id === myProfile._id && (

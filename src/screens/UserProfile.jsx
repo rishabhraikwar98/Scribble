@@ -209,14 +209,14 @@ function UserProfile() {
               {myProfile && !isFollowing(userProfile._id) ? (
                 <button
                   onClick={() => followUser(userId)}
-                  className="bg-blue-600 hover:bg-blue-700 text-md text-white font-semibold px-6 py-1.5 rounded-lg w-11/12 lg:w-auto focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-blue-700"
+                  className="bg-blue-600 hover:bg-blue-700 text-md text-white font-medium px-6 py-1.5 rounded-lg w-11/12 lg:w-auto focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-blue-700"
                 >
                   Follow
                 </button>
               ) : (
                 <button
                   onClick={() => unfollowUser(userId)}
-                  className="bg-gray-200 hover:bg-gray-300 text-md font-semibold px-6 py-1.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-11/12 lg:w-auto"
+                  className="bg-gray-200 hover:bg-gray-300 text-md font-medium px-6 py-1.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500 w-11/12 lg:w-auto"
                 >
                   Unfollow
                 </button>

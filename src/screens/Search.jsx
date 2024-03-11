@@ -85,7 +85,7 @@ function Search() {
                         />
                       </div>
                       <div className="name">
-                        <p className="lg:text-lg text-base font-semibold text-gray-900 lg:-my-1 -my-0.5">
+                        <p className="lg:text-lg text-base font-medium text-gray-900 lg:-my-1 -my-0.5">
                           {p.user_name}
                         </p>
                         <p className="lg:text-base text-sm text-gray-500">

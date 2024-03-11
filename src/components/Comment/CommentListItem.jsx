@@ -11,7 +11,7 @@ function CommentListItem({ comment, deleteComment, isMyPost }) {
     return comment.user._id === myProfile._id;
   };
   return (
-    <div className="flex py-2 px-3">
+    <div className="flex py-2 px-3 hover:bg-gray-200 rounded-lg">
       <div className="flex w-1/2">
         <img
           className="w-10 h-10 rounded-full"
