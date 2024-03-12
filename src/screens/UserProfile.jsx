@@ -245,6 +245,7 @@ function UserProfile() {
                     key={post.title}
                     post={post}
                     refresh={getAllPosts}
+                    isFeed={false}
                   />
                 ))
               )}

@@ -216,7 +216,7 @@ function MyProfile() {
               <NoPosts />
             ) : (
               posts.map((post) => (
-                <Post key={post.title} post={post} refresh={getAllPosts} />
+                <Post key={post.title} post={post} refresh={getAllPosts} isFeed={false} />
               ))
             )}
           </div>

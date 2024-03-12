@@ -13,7 +13,7 @@ import Modal from "../Modal/Modal";
 import CommentSection from "../Comment/CommentSection";
 import { toast} from "react-toastify";
 import { ProfileContext } from "../../context/ProfileContext";
-const Post = ({ post, refresh }) => {
+const Post = ({ post, refresh, isFeed }) => {
   const { token } = useAuth();
   const {myProfile} =useContext(ProfileContext)
   const iconColor = "rgb(55 65 81)";
@@ -154,7 +154,7 @@ const Post = ({ post, refresh }) => {
             <p className="text-sm lg:text-base font-medium">Comment</p>
           </button>
           <div className="w-full flex justify-end  lg:gap-8 gap-5 items-center">
-            {author._id === myProfile._id && (
+            {author._id === myProfile._id && !isFeed && (
               <>
                 {/* <button>
                   <Icon icon={FiEdit} size={20} color={iconColor} />
