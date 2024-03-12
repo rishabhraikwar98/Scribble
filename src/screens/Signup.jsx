@@ -58,6 +58,7 @@ function Signup() {
       }, 500);
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false)
     }
   };
 
