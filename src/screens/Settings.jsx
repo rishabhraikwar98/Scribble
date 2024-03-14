@@ -9,7 +9,7 @@ import axios from "axios";
 import { UploadImage } from "../utils/UploadImage";
 import { toast } from "react-toastify";
 import { API } from "../API/API";
-import BlockUi from "react-block-ui";
+import BlockUi from "@availity/block-ui";
 function Settings() {
   const iconColor = "rgb(55 65 81)";
   const { myProfile, setMyProfile } = useContext(ProfileContext);

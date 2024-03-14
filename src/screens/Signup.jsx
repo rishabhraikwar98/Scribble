@@ -6,7 +6,7 @@ import { API } from "../API/API";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
-import BlockUi from "react-block-ui";
+import BlockUi from "@availity/block-ui";
 import Icon from "../components/Icon/Icon";
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";

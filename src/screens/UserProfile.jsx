@@ -10,8 +10,8 @@ import PostSkeleton from "../components/Post/PostSkeleton";
 import Modal from "../components/Modal/Modal";
 import UserListItem from "../components/UserList/UserListItem";
 import { useParams } from "react-router-dom";
-import BlockUi from "react-block-ui";
-import "react-block-ui/style.css";
+import BlockUi from "@availity/block-ui";
+import "@availity/block-ui/style.css";
 import { toast } from "react-toastify";
 import { ProfileContext } from "../context/ProfileContext";
 function UserProfile() {
