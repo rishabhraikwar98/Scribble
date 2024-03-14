@@ -4,10 +4,12 @@ export const API = {
   Auth: {
     login: base_url + "/auth/login", // POST
     signup: base_url + "/auth/signup", // POST
+    changePassword: base_url+"/auth/change-password" // PATCH
   },
   Image_Upload: base_url + "/upload", // POST
   Profile: {
     myProfile: base_url + "/profile/me", // GET
+    updateMyProfile: base_url + "/profile/me", // PATCH
     userProfile: base_url + "/profile/:userId", // GET
     follow: base_url + "/profile/follow/:userId", // PATCH
     unfollow: base_url + "/profile/unfollow/:userId", // PATCH

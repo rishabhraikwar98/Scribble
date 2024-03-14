@@ -47,7 +47,7 @@ function Search() {
       <div className="search flex justify-center">
         <div className="lg:w-5/12 w-11/12">
           <div className="lg:mt-8 mt-6 lg:py-6 py-4 w-full">
-            <p className="lg:text-4xl text-3xl text-gray-900 font-bold">
+            <p className="lg:text-4xl text-3xl text-gray-800 font-bold">
               Search
             </p>
           </div>
