@@ -8,7 +8,9 @@ import { toast} from "react-toastify";
 import no_user from "../assets/no_user.png";
 import Loading from "react-loading";
 import { ProfileContext } from "../context/ProfileContext";
+import { useSearchParams } from "react-router-dom";
 function Search() {
+  let [searchParams, setSearchParams] = useSearchParams();
   const iconColor = "rgb(55 65 81)";
   const {myProfile} =useContext(ProfileContext)
   const [profiles, setProfiles] = useState([]);
@@ -31,6 +33,7 @@ function Search() {
       const params = {
         query: search,
       };
+      setSearchParams({user_name:search,name:search})
       const res = await axios.get(API.Profile.searchProfiles, {
         params: params,
       });
@@ -69,10 +72,10 @@ function Search() {
             <div className="people mt-10">
               <p className="text-xl font-bold text-gray-900">People</p>
               <div className="results mt-5 px-1 overflow-y-auto max-h-[540px] lg:max-h-96">
-                {profiles.map((p) => {
+                {profiles.map((p,index) => {
                   return (
                     <div
-                    key={p._id}
+                    key={index}
                       onClick={() => {
                         handleRedirect(p);
                       }}

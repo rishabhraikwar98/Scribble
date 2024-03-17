@@ -1,11 +1,14 @@
 import axios from "axios";
 import { API } from "../API/API";
-
-export const UploadImage = async (file) => {
+// crop = fit or Pad 
+export const UploadImage = async (file, crop) => {
   const formData = new FormData();
   formData.append("file", file);
   try {
     const response = await axios.post(API.Image_Upload, formData, {
+      params: {
+        crop,
+      },
       headers: {
         "Content-Type": "multipart/form-data",
       },

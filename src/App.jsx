@@ -21,6 +21,7 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProfileProvider } from "./context/ProfileContext";
+import "@availity/block-ui/src/BlockUi.css"
 
 function App() {
   return (

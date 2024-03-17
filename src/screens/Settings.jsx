@@ -10,6 +10,7 @@ import { UploadImage } from "../utils/UploadImage";
 import { toast } from "react-toastify";
 import { API } from "../API/API";
 import BlockUi from "@availity/block-ui";
+import CustomLoader from "../components/Loader/CustomLoader";
 function Settings() {
   const iconColor = "rgb(55 65 81)";
   const { myProfile, setMyProfile } = useContext(ProfileContext);
@@ -30,7 +31,7 @@ function Settings() {
   const updateAvatar = async (file) => {
     if (!file) return;
     try {
-      const newAvatar = await UploadImage(file);
+      const newAvatar = await UploadImage(file,"pad");
       if (!newAvatar) {
         toast.error("Could not update Avatar !");
         return;
@@ -131,7 +132,7 @@ function Settings() {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center min-h-screen">
         <div className="lg:w-5/12 w-11/12">
           <div className="lg:mt-8 mt-6 lg:py-6 py-4 w-full">
             <p className="lg:text-4xl text-3xl text-gray-800 font-bold">
@@ -171,7 +172,7 @@ function Settings() {
                 />
               </div>
               <div className="profile-edit form">
-                <BlockUi tag="div" blocking={block1}>
+                <BlockUi blocking={block1} loader={<CustomLoader size={40} color="blue"/>}>
                   <div className="mb-1.5 flex justify-end">
                     <button
                       onClick={() => setEditable(true)}
@@ -270,7 +271,7 @@ function Settings() {
                 </div>
               ) : (
                 <div className="change password lg:w-1/2 w-full">
-                  <BlockUi blocking={block2} tag={"div"}>
+                  <BlockUi blocking={block2} loader={<CustomLoader size={40} color="blue"/>}>
                     <div className="flex flex-col mb-4">
                       <label className="font-medium mb-1">
                         Current Password

@@ -10,6 +10,7 @@ import BlockUi from "@availity/block-ui";
 import Icon from "../components/Icon/Icon";
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
+import CustomLoader from "../components/Loader/CustomLoader";
 function Signup() {
   const iconColor = "rgb(55 65 81)";
   const [email, setEmail] = useState("");
@@ -63,8 +64,8 @@ function Signup() {
   };
 
   return (
-    <div>
-      <BlockUi tag="div" blocking={loading}>
+    <>
+      <BlockUi blocking={loading} loader={<CustomLoader size={50} color={"blue"}/>}>
         <div className="flex justify-center items-center h-screen bg-gray-100">
           <div className="bg-white lg:p-8 px-8 py-6 rounded-xl shadow-md lg:w-96 w-80 ">
             <div className="flex justify-center">
@@ -199,7 +200,7 @@ function Signup() {
           </div>
         </div>
       </BlockUi>
-    </div>
+    </>
   );
 }
 

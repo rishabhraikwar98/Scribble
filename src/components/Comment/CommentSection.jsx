@@ -58,11 +58,11 @@ function CommentSection({ comments, refresh, postId, loadingComments }) {
           </p>
         )}
         {!loadingComments && comments.length
-          ? comments.map((comment) => {
+          ? comments.map((comment,index) => {
               return (
                 <CommentListItem
                   deleteComment={deleteComment}
-                  key={comment._id}
+                  key={index}
                   comment={comment}
                   isMyPost={isMyPost}
                 />

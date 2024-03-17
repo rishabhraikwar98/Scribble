@@ -8,9 +8,9 @@ function UserListItem({ user, isFollowing, followUser, unfollowUser}) {
   const navigate = useNavigate();
   const handleRedirect = () => {
     if (user._id === myProfile._id) {
-      navigate(`/profile/me`);
+      navigate(`/profile/me`,{replace:true,relative:"route"});
     } else {
-      navigate(`/profile/${user._id}/${user.user_name}`);
+      navigate(`/profile/${user._id}/${user.user_name}`,{replace:true,relative:"route"});
     }
   };
   return (

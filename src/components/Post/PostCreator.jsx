@@ -36,11 +36,11 @@ const PostCreator = ({ refresh, createPost }) => {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-gray-50 p-3 px-5 border rounded-lg shadow-sm mb-8  lg:w-9/12 w-full">
+      <div className="p-3 px-5 border rounded-lg shadow-sm mb-8  lg:w-9/12 w-full">
         <form onSubmit={handleSubmit}>
           <div className="relative">
             <img
-              src={myProfile ? myProfile.avatar : no_user} // Placeholder image
+              src={ myProfile&& myProfile.avatar ||no_user} // Placeholder image
               alt="Profile"
               className="absolute w-10 h-10 rounded-full left-0 top-0 mt-2 ml-2"
             />
