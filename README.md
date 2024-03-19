@@ -3,12 +3,11 @@
 <a/>
   
 ---
-  
+---
+
 A Simple functional social media platfrom where you can Share Photos, thoughts, memories of your life, explore people and posts.
 
 **Project live at:**[https://scribble-omega.vercel.app)
-
----
 
 ## Features
 
