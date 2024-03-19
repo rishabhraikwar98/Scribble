@@ -1,13 +1,12 @@
 <a href="https://scribble-omega.vercel.app">
-<img src="https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710850878/slybx6xwxsrnmnpcjy1i.png" width="300px"/>
+<img src="https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710850878/slybx6xwxsrnmnpcjy1i.png" width="250px"/>
 <a/>
   
----
 ---
 
 A Simple functional social media platfrom where you can Share Photos, thoughts, memories of your life, explore people and posts.
 
-**Project live at:**[https://scribble-omega.vercel.app)
+<a href= "https://scribble-omega.vercel.app">Live Link<a>
 
 ## Features
 
