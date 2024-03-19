@@ -9,7 +9,7 @@ A Simple functional social media platfrom where you can Share Photos, thoughts, 
 ## Features
 
 - User Profile Management.
-- Post Creation and Interaction.
+- Post Creation and Interaction. (Like, Comment, Delete etc.)
 - Responsive Design. (Mobile & Web).
 - Secure Authentication and Authorization.
 - Infinite Scrolling Feature.
