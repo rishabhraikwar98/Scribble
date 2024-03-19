@@ -1,3 +1,4 @@
+<img src="https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710850878/slybx6xwxsrnmnpcjy1i.png" width="50px"/>
 # [Scribble](https://scribble-omega.vercel.app)
 
 A Simple functional social media platfrom where you can Share Photos, thoughts, memories of your life, explore people and posts.
