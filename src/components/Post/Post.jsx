@@ -11,7 +11,7 @@ import no_user from "../../assets/no_user.png";
 import { timeAgo } from "../../utils/timeAgo";
 import Modal from "../Modal/Modal";
 import CommentSection from "../Comment/CommentSection";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { ProfileContext } from "../../context/ProfileContext";
 import { useNavigate } from "react-router-dom";
 const Post = ({ post, refresh, isFeed }) => {
@@ -51,11 +51,23 @@ const Post = ({ post, refresh, isFeed }) => {
     try {
       await axios.delete(URI);
       await refresh();
-      toast.info("Post Deleted !");
+      toast.success("Post Deleted !");
     } catch (error) {
       toast.error("Please Try Again Later !");
     }
   };
+  const handleEditPost = async (postId) => {
+    const payload = {};
+    const URI = API.Posts.editPost.replace(":postId", postId);
+    try {
+      await axios.patch(URI, payload);
+      await refresh();
+      toast.success("Post Updated !");
+    } catch (error) {
+      toast.error("Please Try Again Later !");
+    }
+  };
+
   //Comment Actions
   const getAllComments = async () => {
     const URI = API.Comments.allComments.replace(":postId", post._id);
@@ -121,7 +133,6 @@ const Post = ({ post, refresh, isFeed }) => {
                 <img src={image} alt="Post" className="w-full rounded-lg" />
               </div>
             )}
-
             {/* Post title */}
             {title && (
               <p
@@ -148,7 +159,9 @@ const Post = ({ post, refresh, isFeed }) => {
                       : handleUnlikePost(post._id);
                   }}
                 >
-                  <p className="mt-1">{liked_by.length?liked_by.length:""}</p>
+                  <p className="mt-1">
+                    {liked_by.length ? liked_by.length : ""}
+                  </p>
                   <Icon
                     icon={AiFillLike}
                     size={22}
@@ -169,16 +182,18 @@ const Post = ({ post, refresh, isFeed }) => {
                 onClick={openCommentsModal}
                 className="flex lg:gap-2 gap-1 items-center  hover:bg-gray-200 p-1 rounded-lg"
               >
-                <p>{total_comments>0?total_comments:""}</p>
+                <p>{total_comments > 0 ? total_comments : ""}</p>
                 <Icon icon={LiaComment} size={22} color={iconColor} />
                 <p className="text-sm lg:text-base font-medium">Comment</p>
               </button>
-              <div className="w-full flex justify-end  lg:gap-8 gap-5 items-center">
+              <div className="w-full flex justify-end  gap-5 items-center">
                 {post && author._id === myProfile._id && !isFeed && (
                   <>
-                    {/* <button>
-                  <Icon icon={FiEdit} size={20} color={iconColor} />
-                </button> */}
+                    {/* <button
+                      className="hover:bg-gray-200 p-1 rounded-lg"
+                    >
+                      <Icon icon={FiEdit} size={20} color={iconColor} />
+                    </button> */}
                     <button
                       className="hover:bg-gray-200 p-1 rounded-lg"
                       onClick={() => handleDeletePost(post._id)}

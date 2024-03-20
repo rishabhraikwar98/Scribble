@@ -7,7 +7,7 @@ import { FaUserEdit } from "react-icons/fa";
 import Icon from "../components/Icon/Icon";
 import axios from "axios";
 import { UploadImage } from "../utils/UploadImage";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { API } from "../API/API";
 import BlockUi from "@availity/block-ui";
 import CustomLoader from "../components/Loader/CustomLoader";

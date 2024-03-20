@@ -4,7 +4,7 @@ import { API } from "../API/API";
 import { useNavigate } from "react-router-dom";
 import Icon from "../components/Icon/Icon";
 import { MdOutlineClear } from "react-icons/md";
-import { toast} from "react-toastify";
+import toast from "react-hot-toast";
 import no_user from "../assets/no_user.png";
 import Loading from "react-loading";
 import { ProfileContext } from "../context/ProfileContext";
@@ -58,6 +58,7 @@ function Search() {
             <input
               className="w-full lg:px-8 px-6 lg:py-4 py-3.5 lg:text-lg text-gray-800 font-medium rounded-xl bg-gray-100 focus:outline-none"
               placeholder="Search people"
+              autoFocus
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);

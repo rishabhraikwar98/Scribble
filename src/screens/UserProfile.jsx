@@ -10,7 +10,7 @@ import PostSkeleton from "../components/Post/PostSkeleton";
 import Modal from "../components/Modal/Modal";
 import UserListItem from "../components/UserList/UserListItem";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { ProfileContext } from "../context/ProfileContext";
 import BlockUi from "@availity/block-ui";
 import CustomLoader from "../components/Loader/CustomLoader";
@@ -103,7 +103,7 @@ function UserProfile() {
       await getUserProfile();
       await getMyProfile();
       setLoading(false);
-      toast.info(`Removed ${userProfile.user_name}`);
+      toast.success(`Removed ${userProfile.user_name}`);
     } catch (error) {
       toast.error("Please Try Again Later !");
     }

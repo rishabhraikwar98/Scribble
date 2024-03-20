@@ -3,7 +3,7 @@ import validator from "validator";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API/API";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import logo1 from "../assets/logo1.png";
 import Icon from "../components/Icon/Icon";

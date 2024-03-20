@@ -18,20 +18,14 @@ import PrivateRoutes from "./routes/privateRoutes";
 import { AuthProvider } from "./context/AuthContext";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SkeletonTheme } from "react-loading-skeleton";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { ProfileProvider } from "./context/ProfileContext";
-import "@availity/block-ui/src/BlockUi.css"
-
+import "@availity/block-ui/src/BlockUi.css";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <div className="font-Roboto">
       <AuthProvider>
-        <ToastContainer
-          position="bottom-center"
-          pauseOnHover={false}
-          autoClose={3000}
-        />
+        <Toaster position="bottom-center" reverseOrder={false} />
         <SkeletonTheme baseColor="#f3f3f3" highlightColor="#D3D3D3">
           <ProfileProvider>
             <Router>

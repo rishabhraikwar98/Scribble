@@ -9,7 +9,7 @@ import NoPosts from "../components/Post/NoPosts";
 import PostSkeleton from "../components/Post/PostSkeleton";
 import Modal from "../components/Modal/Modal";
 import UserListItem from "../components/UserList/UserListItem";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { ProfileContext } from "../context/ProfileContext";
 import BlockUi from "@availity/block-ui";
 import CustomLoader from "../components/Loader/CustomLoader"
