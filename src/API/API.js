@@ -19,6 +19,7 @@ export const API = {
     allPosts: base_url + "/post/:userId/all", // GET
     createNewPost: base_url + "/post", // POST
     deletePost: base_url + "/post/:postId", // DELETE
+    editPost: base_url + "/post/:postId", // Patch
     like: base_url + "/post/:postId/like", // POST | DELETE
   },
   Comments: {
