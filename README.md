@@ -1,49 +1,64 @@
-<a href="https://scribble-omega.vercel.app">
-<img src="https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710850878/slybx6xwxsrnmnpcjy1i.png" width="250px"/>
-<a/>
-  
----
 
+![Logo](https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710939709/gf7bujek3hiaqxcxuft3.jpg)
+
+
+# Scribble
 A Simple functional social media platfrom where you can Share Photos, thoughts, memories of your life, explore people and posts.
 
-<a href= "https://scribble-omega.vercel.app">Live Link<a>
 
-## Features
 
-- User Profile Management.
-- Post Creation and Interaction. (Like, Comment, Delete etc.)
-- Responsive Design. (Mobile & Web).
-- Secure Authentication and Authorization.
-- Infinite Scrolling Feature.
+## Demo
+Live Link: https://scribble-omega.vercel.app
 
----
+Server: https://github.com/rishabhraikwar98/Scribble-API
+
+
+## Screenshots
+
+![App Screenshot](https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710939285/Screenshots/k0vvqmaqmz8nxdk6uiyx.jpg)
+
+![App Screenshot](https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710939848/Screenshots/adltmfosbytfrryft2oc.jpg)
+
+![App Screenshot](https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710940366/Screenshots/vdbfop0ijrovah2gyi71.jpg)
+
+![App Screenshot](https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710940368/Screenshots/laduk1kiekiigph0811k.jpg)
+
+
+
 
 ## Technologies used
 
 - [React](https://es.reactjs.org/) - Front-End JavaScript library.
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework.
-- [React Toastify](https://fkhadra.github.io/react-toastify/introduction/) - Toast notifications for React.
+- [React hot toast](https://react-hot-toast.com/) - Toast notifications for React.
 - [axios](https://axios-http.com/) - Toast notifications for React.
 - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) - Loading Skeleton for React
 
 ---
 
-## Build steps
+## Run Locally
 
-1. Clone this repo
-
-```bash
-git clone https://github.com/rishabhraikwar98/scribble && cd scribble
-```
-
-2. Install project dependecies
+Clone the project
 
 ```bash
-npm install
+  git clone https://github.com/rishabhraikwar98/scribble
 ```
 
-3. Build the project and start a local server
+Go to the project directory
 
 ```bash
-npm run build && npm run serve
+  cd scribble
 ```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
