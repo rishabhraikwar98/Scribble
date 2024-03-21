@@ -23,9 +23,16 @@ Server: https://github.com/rishabhraikwar98/Scribble-API
 
 ![App Screenshot](https://res.cloudinary.com/dbdqc0uzq/image/upload/v1710940368/Screenshots/laduk1kiekiigph0811k.jpg)
 
+## Features
 
-
-
+- User authentication and authorization (JWT)
+- User profile creation and management
+- Post creation and management
+- Commenting on posts
+- Liking posts and comments 
+- Following/unfollowing users
+- likes,Comments stats  
+ 
 ## Technologies used
 
 - [React](https://es.reactjs.org/) - Front-End JavaScript library.
