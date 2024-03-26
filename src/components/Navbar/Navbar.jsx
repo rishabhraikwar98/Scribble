@@ -42,7 +42,7 @@ function Navbar() {
             onClick={() => {
               navigate("/home");
             }}
-            className="bg-gray-100 w-10 h-10 flex justify-center items-center rounded-xl"
+            className="bg-gray-100 hover:bg-gray-200 w-10 h-10 flex justify-center items-center rounded-xl  hover:scale-105"
           >
             <Icon icon={RiHome2Line} size={20} color={iconColor} />
           </div>
@@ -50,7 +50,7 @@ function Navbar() {
             onClick={() => {
               navigate("/search");
             }}
-            className="bg-gray-100 w-10 h-10 flex justify-center items-center rounded-xl"
+            className="bg-gray-100 hover:bg-gray-200 w-10 h-10 flex justify-center items-center rounded-xl hover:scale-105"
           >
             <Icon icon={RiSearchLine} size={20} color={iconColor} />
           </div>
@@ -63,24 +63,24 @@ function Navbar() {
             <Icon icon={LuBell} size={20} color={iconColor} />
           </div> */}
           <button onClick={() => setMenuOpen(!menuOpen)}>
-            <div className=" avatar flex justify-center items-center">
+            <div className="avatar flex justify-center items-center hover:scale-105">
               <img
                 alt="my photo"
                 draggable="false"
                 src={myProfile && myProfile.avatar? myProfile.avatar:no_user}
-                className="w-[38px] rounded-full"
+                className="w-[38px] rounded-full border-2 border-gray-300"
               />
             </div>
           </button>
           {menuOpen && (
-            <div className=" z-50 menu absolute right-2 mt-14 xl:w-40 w-36 bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
+            <div className="z-50 menu absolute right-2 mt-14 xl:w-40 w-36 bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
               <ul className="lg:py-3 py-2 text-gray-700 font-medium text-md">
                 <li
                   onClick={() => {
                     navigate("/profile/me");
                     setMenuOpen(!menuOpen);
                   }}
-                  className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex gap-3 items-center"
+                  className="py-2 px-4 cursor-pointer flex gap-3 items-center"
                 >
                   <Icon icon={LiaUserAltSolid} size={22} color={iconColor} />
                   <p>My Profile</p>
@@ -90,14 +90,14 @@ function Navbar() {
                     navigate("/profile/settings");
                     setMenuOpen(!menuOpen);
                   }}
-                  className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex gap-3 items-center"
+                  className="py-2 px-4 cursor-pointer flex gap-3 items-center"
                 >
                   <Icon icon={IoSettingsOutline} size={22} color={iconColor} />
                   <p>Settings</p>
                 </li>
                 <li
                   onClick={() => logout()}
-                  className="py-2 px-4 hover:bg-gray-100 cursor-pointer flex gap-3 items-center"
+                  className="py-2 px-4 cursor-pointer flex gap-3 items-center"
                 >
                   <Icon icon={CiLogout} size={22} color={iconColor} />
                   <p>Logout</p>

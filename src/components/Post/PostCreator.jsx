@@ -3,7 +3,7 @@ import { ProfileContext } from "../../context/ProfileContext";
 import { FaImage } from "react-icons/fa";
 import { RiSendPlane2Line, RiCloseCircleLine } from "react-icons/ri";
 import no_user from "../../assets/no_user.png";
-import { UploadImage } from "../../utils/UploadImage";
+import toast from "react-hot-toast";
 const PostCreator = ({ refresh, createPost }) => {
   const { myProfile } = useContext(ProfileContext);
   const [title, setTitle] = useState("");
@@ -13,6 +13,7 @@ const PostCreator = ({ refresh, createPost }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!title && !file) {
+      toast.error("Can not create empty post!")
       return;
     }
     await createPost(file, title);
