@@ -31,7 +31,7 @@ function Home() {
     try {
       const res = await axios.get(API.Feed.getFeed, { params: query });
       setFeed(res.data.feed)
-      setTotalPages(res.data.totalPages)
+      setTotalPages(res.data.totalPages);
       setLoadingFeed(false);
     } catch (error) {
       toast.error("Please Try Again Later !");
@@ -56,9 +56,9 @@ function Home() {
       };
       await axios.post(API.Posts.createNewPost, payload);
       setCreatingPost(false);
-      setLoadingFeed(true)
-      await getMyFeed()
-      setLoadingFeed(false)
+      setLoadingFeed(true);
+      await getMyFeed();
+      setLoadingFeed(false);
     } catch (error) {
       toast.error("Please Try Again Later !");
       setCreatingPost(false);
@@ -78,7 +78,14 @@ function Home() {
           {loadingFeed ? (
             <PostSkeleton />
           ) : feed.length === 0 ? (
-            <p>No feed</p>
+            <div className="flex flex-col items-center lg:mt-14 mt-8 justify-center lg:p-8 p-4 py-5">
+              <h1 className="lg:text-2xl text-xl font-medium text-gray-700">
+                You don't have feed to view.
+              </h1>
+              <p className="mt-4 text-sm lg:text-base text-gray-500 text-center">
+                Start creating posts or start follwing users.
+              </p>
+            </div>
           ) : (
             feed.map((post, index) => (
               <Post key={index} post={post} refresh={getMyFeed} isFeed={true} />
