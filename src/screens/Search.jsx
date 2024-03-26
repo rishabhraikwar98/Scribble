@@ -56,7 +56,7 @@ function Search() {
           </div>
           <div className="relative search-bar">
             <input
-              className="w-full lg:px-8 px-6 lg:py-4 py-3.5 lg:text-lg text-gray-800 font-medium rounded-xl bg-gray-100 focus:outline-none"
+              className=" border border-gray-200 w-full lg:px-8 px-6 lg:py-4 py-3.5 lg:text-lg text-gray-800 font-medium rounded-xl bg-gray-100 focus:outline-none"
               placeholder="Search people"
               autoFocus
               value={search}
