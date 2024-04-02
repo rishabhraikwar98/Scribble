@@ -67,7 +67,7 @@ function Signup() {
     <>
       <BlockUi blocking={loading} loader={<CustomLoader size={50} color={"blue"}/>}>
         <div className="flex justify-center items-center h-screen bg-gray-100">
-          <div className="bg-white lg:p-8 px-8 py-6 rounded-xl shadow-md lg:w-96 w-80 ">
+          <div className="bg-white lg:p-8 px-8 py-6 rounded-xl shadow-md lg:w-96 w-80 lg:mt-0 -mt-24">
             <div className="flex justify-center">
               <div className="w-[160px] mb-1.5">
                 <img src={logo1} alt="Company Logo" className="mx-auto" />

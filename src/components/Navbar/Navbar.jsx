@@ -73,8 +73,8 @@ function Navbar() {
             </div>
           </button>
           {menuOpen && (
-            <div className="z-50 menu absolute right-2 mt-14 xl:w-40 w-36 bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
-              <ul className="lg:py-3 py-2 text-gray-700 font-medium text-md">
+            <div className="z-50 menu absolute right-2 mt-14 w-40 bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
+              <ul className="lg:py-3 py-2 text-gray-700 font-medium text-md lg:block flex flex-col gap-1.5">
                 <li
                   onClick={() => {
                     navigate("/profile/me");
