@@ -46,7 +46,7 @@ function CommentSection({ comments, refresh, postId, loadingComments }) {
 
   return (
     <div className="comment-section">
-      <div className="comments min-h-80 overflow-y-auto max-h-80">
+      <div className="comments min-h-60 overflow-y-auto max-h-60  lg:min-h-80 lg:max-h-80">
         {loadingComments && (
           <div className="w-full flex justify-center">
             <Loading type="bubbles" color={iconColor} />
