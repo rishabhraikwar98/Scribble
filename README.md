@@ -40,6 +40,7 @@ Server: https://github.com/rishabhraikwar98/Scribble-API
 - [React hot toast](https://react-hot-toast.com/) - Toast notifications for React.
 - [axios](https://axios-http.com/) - Toast notifications for React.
 - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) - Loading Skeleton for React
+- [Framer-Motion](https://www.framer.com/motion/) - Animation library for React
 
 ---
 
