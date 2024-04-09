@@ -4,6 +4,7 @@ import { FaImage } from "react-icons/fa";
 import { RiSendPlane2Line, RiCloseCircleLine } from "react-icons/ri";
 import no_user from "../../assets/no_user.png";
 import toast from "react-hot-toast";
+import {motion} from "framer-motion"
 const PostCreator = ({ refresh, createPost }) => {
   const { myProfile } = useContext(ProfileContext);
   const [title, setTitle] = useState("");
@@ -36,7 +37,7 @@ const PostCreator = ({ refresh, createPost }) => {
   };
 
   return (
-    <div className="flex justify-center">
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} className="flex justify-center">
       <div className="p-3 px-5 border rounded-lg shadow-sm mb-8  lg:w-9/12 w-full">
         <form onSubmit={handleSubmit}>
           <div className="relative">
@@ -97,7 +98,7 @@ const PostCreator = ({ refresh, createPost }) => {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

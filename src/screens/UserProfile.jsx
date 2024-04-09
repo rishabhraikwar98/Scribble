@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { ProfileContext } from "../context/ProfileContext";
 import BlockUi from "@availity/block-ui";
 import CustomLoader from "../components/Loader/CustomLoader";
+import {motion} from "framer-motion"
 function UserProfile() {
   const { token } = useAuth();
   const { userId } = useParams();
@@ -162,7 +163,7 @@ function UserProfile() {
         blocking={block}
         loader={<CustomLoader size={40} color="blue" />}
       >
-        <div className="layout scroll-smooth">
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.3}} className="layout scroll-smooth">
           <div className="box lg:mx-72 mx:20 lg:mt-12 mt-5">
             <div className="lg:flex lg:justify-between lg:items-center">
               <div className="info flex items-center gap-5 mx-10 lg:mx-5">
@@ -280,7 +281,7 @@ function UserProfile() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </BlockUi>
     </>
   );

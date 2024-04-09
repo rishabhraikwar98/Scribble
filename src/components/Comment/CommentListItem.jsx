@@ -4,6 +4,7 @@ import { timeAgo } from "../../utils/timeAgo";
 import Icon from "../Icon/Icon"
 import { RiDeleteBinLine } from "react-icons/ri";
 import { ProfileContext } from "../../context/ProfileContext";
+import {motion} from "framer-motion"
 function CommentListItem({ comment, deleteComment, isMyPost }) {
   const iconColor = "rgb(55 65 81)";
   const { myProfile } = useContext(ProfileContext);
@@ -11,7 +12,11 @@ function CommentListItem({ comment, deleteComment, isMyPost }) {
     return comment.user._id === myProfile._id;
   };
   return (
-    <div className="flex py-2 px-3 hover:bg-gray-200 rounded-lg">
+    <motion.div
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:.3}}
+    className="flex py-2 px-3 rounded-lg">
       <div className="flex w-1/2">
         <img
           className="w-10 h-10 rounded-full"
@@ -26,27 +31,31 @@ function CommentListItem({ comment, deleteComment, isMyPost }) {
       <div className="flex justify-between items-start lg:w-11/12 w-6/12 ">
         <p className="text-gray-800 px-1 text-base">{comment.comment}</p>
         {isMyPost && (
-          <button
+          <motion.button
+          whileHover={{scale:1.2}} 
+          whileTap={{scale:1}}
             className="mb-3 p-1.5"
             onClick={() => {
               deleteComment(comment._id);
             }}
           >
             <Icon icon={RiDeleteBinLine} size={16} color={iconColor} />
-          </button>
+          </motion.button>
         )}
         {!isMyPost && isMyComment() && (
-          <button
+          <motion.button
+          whileTap={{scale:1.2}}
+          whileHover={{scale:1}}
             className="mb-3 p-1.5"
             onClick={() => {
               deleteComment(comment._id);
             }}
           >
             <Icon icon={RiDeleteBinLine} size={16} color={iconColor} />
-          </button>
+          </motion.button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

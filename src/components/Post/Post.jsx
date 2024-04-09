@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import BlockUi from "@availity/block-ui";
 import CustomLoader from "../Loader/CustomLoader";
 import { UploadImage } from "../../utils/UploadImage";
+import { motion } from "framer-motion";
 const Post = ({ post, refresh, isFeed }) => {
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -31,7 +32,7 @@ const Post = ({ post, refresh, isFeed }) => {
   const [newTitle, setNewTitle] = useState("");
   const [newImage, setNewImage] = useState("");
   const fileInputRef = useRef(null);
-  const [block,setBlock] = useState(false)
+  const [block, setBlock] = useState(false);
   useEffect(() => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }, []);
@@ -66,24 +67,24 @@ const Post = ({ post, refresh, isFeed }) => {
     }
   };
   const handleEditPost = async (postId) => {
-    setBlock(true)
+    setBlock(true);
     const payload = {
       title: newTitle,
-      image:image
+      image: image,
     };
     const URI = API.Posts.editPost.replace(":postId", postId);
-    if(newImage){
-      const imageURL= await UploadImage(newImage,"fit")
-      payload.image = imageURL
+    if (newImage) {
+      const imageURL = await UploadImage(newImage, "fit");
+      payload.image = imageURL;
     }
     try {
       await axios.patch(URI, payload);
-      setBlock(false)
-      handleCloseEdit()
+      setBlock(false);
+      handleCloseEdit();
       await refresh();
       toast.success("Post Updated !");
     } catch (error) {
-      setBlock(false)
+      setBlock(false);
       toast.error("Please Try Again Later !");
     }
   };
@@ -122,12 +123,20 @@ const Post = ({ post, refresh, isFeed }) => {
   const handleCloseEdit = () => {
     setOpenEdit(false);
     setNewTitle("");
-    setNewImage("")
+    setNewImage("");
+  };
+  const animationVarient = {
+    hover: {
+      scale: 1.05,
+    },
+    tap: {
+      scale: 1,
+    },
   };
 
   return (
     <>
-    {/* comment modal */}
+      {/* comment modal */}
       <Modal
         title={"Comments"}
         isOpen={openComments}
@@ -142,84 +151,98 @@ const Post = ({ post, refresh, isFeed }) => {
       </Modal>
       {/* post edit modal */}
       <Modal title={"Edit Post"} onClose={handleCloseEdit} isOpen={openEdit}>
-        <BlockUi blocking={block} loader={<CustomLoader color="blue" size={40}/>}>
-        <div className="p-4">
-          <div className="lg:mt-4 -mt-2">
-            <label
-              htmlFor="editTitle"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
-              Change Image
-            </label>
-            <div className="flex justify-center">
-              {!newImage ? (
-                <div className="relative">
-                <img
-                  alt="image"
-                  src={!image ? no_image : image}
-                  className={`h-48 rounded-lg object-contain border cursor-pointer ${!image&&"opacity-50"} ${image&&"shadow-lg"}`}
-                  onClick={() => {
-                    fileInputRef.current.click();
-                  }}
+        <BlockUi
+          blocking={block}
+          loader={<CustomLoader color="blue" size={40} />}
+        >
+          <div className="p-4">
+            <div className="lg:mt-4 -mt-2">
+              <label
+                htmlFor="editTitle"
+                className="block mb-2 text-sm font-medium text-gray-700"
+              >
+                Change Image
+              </label>
+              <div className="flex justify-center">
+                {!newImage ? (
+                  <div className="relative">
+                    <img
+                      alt="image"
+                      src={!image ? no_image : image}
+                      className={`h-48 rounded-lg object-contain border cursor-pointer ${
+                        !image && "opacity-50"
+                      } ${image && "shadow-lg"}`}
+                      onClick={() => {
+                        fileInputRef.current.click();
+                      }}
+                    />
+                    {!image && (
+                      <p className="absolute top-32 right-12 text-gray-500 text-xl">
+                        No Image
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <img
+                    alt="new image"
+                    className="h-48 rounded-lg object-contain cursor-pointer shadow-lg"
+                    src={newImage && URL.createObjectURL(newImage)}
+                  />
+                )}
+                <input
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  id="editImage"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setNewImage(e.target.files[0])}
                 />
-                {!image&&<p className="absolute top-32 right-12 text-gray-500 text-xl">No Image</p>}
-                </div>
-
-              ) : (
-                <img
-                  alt="new image"
-                  className="h-48 rounded-lg object-contain cursor-pointer shadow-lg"
-                  src={newImage&&URL.createObjectURL(newImage)}
-                />
-              )}
+              </div>
+            </div>
+            <div className="mt-4">
+              <label
+                htmlFor="editTitle"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Edit Title
+              </label>
               <input
-                ref={fileInputRef}
-                style={{ display: "none" }}
-                id="editImage"
-                type="file"
-                accept="image/*"
-                onChange={(e) => setNewImage(e.target.files[0])}
+                id="editTitle"
+                type="text"
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+                className="mt-1 block w-full bg-gray-50 border-gray-300 rounded-md shadow-sm px-3 py-2 text-gray-800 outline-none"
+                placeholder="Enter new title"
               />
             </div>
+            <div className="mt-5 flex gap-5 justify-end">
+              <button
+                type="button"
+                className="inline-flex justify-center w-20 px-4 py-1.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 focus:outline-none"
+                onClick={() => handleEditPost(post._id)}
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                className="inline-flex justify-center w-20 px-4 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-xl hover:bg-gray-200 focus:outline-none"
+                onClick={handleCloseEdit}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-          <div className="mt-4">
-            <label
-              htmlFor="editTitle"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Edit Title
-            </label>
-            <input
-              id="editTitle"
-              type="text"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
-              className="mt-1 block w-full bg-gray-50 border-gray-300 rounded-md shadow-sm px-3 py-2 text-gray-800 outline-none"
-              placeholder="Enter new title"
-            />
-          </div>
-          <div className="mt-5 flex gap-5 justify-end">
-            <button
-              type="button"
-              className="inline-flex justify-center w-20 px-4 py-1.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 focus:outline-none"
-              onClick={()=>handleEditPost(post._id)}
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              className="inline-flex justify-center w-20 px-4 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-xl hover:bg-gray-200 focus:outline-none"
-              onClick={handleCloseEdit}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
         </BlockUi>
       </Modal>
       {post && myProfile ? (
         <>
-          <div className="bg-gray-50 shadow-md rounded-lg p-4 mb-3 lg:w-8/12 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            viewport={{ once: true }}
+            className="bg-gray-50 shadow-md rounded-lg p-4 mb-3 lg:w-8/12 w-full"
+          >
             {/* Post header */}
             <div
               onClick={handleRedirect}
@@ -254,7 +277,10 @@ const Post = ({ post, refresh, isFeed }) => {
             {/* Post actions */}
             <div className="flex items-center mt-3 lg:gap-12 gap-6">
               {
-                <button
+                <motion.button
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={animationVarient}
                   className="flex lg:gap-2 gap-1 items-center hover:bg-gray-200 p-1 rounded-lg"
                   onClick={() => {
                     !liked_by
@@ -283,26 +309,35 @@ const Post = ({ post, refresh, isFeed }) => {
                     }
                   />
                   <p className="text-sm font-medium">Like</p>
-                </button>
+                </motion.button>
               }
-              <button
+              <motion.button
+                whileHover="hover"
+                whileTap="tap"
+                variants={animationVarient}
                 onClick={openCommentsModal}
                 className="flex lg:gap-2 gap-1 items-center  hover:bg-gray-200 p-1 rounded-lg"
               >
                 <p>{total_comments > 0 ? total_comments : ""}</p>
                 <Icon icon={LiaComment} size={22} color={iconColor} />
                 <p className="text-sm font-medium">Comment</p>
-              </button>
-              <div className="w-full flex justify-end  gap-4 items-center">
+              </motion.button>
+              <div className="w-full flex justify-end  gap-7 items-center">
                 {post && author._id === myProfile._id && !isFeed && (
                   <>
-                    <button
+                    <motion.button
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={animationVarient}
                       onClick={handleOpenEdit}
                       className="hover:bg-gray-200 p-1 rounded-lg"
                     >
                       <Icon icon={FiEdit} size={18} color={iconColor} />
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={animationVarient}
                       className="hover:bg-gray-200 p-1 rounded-lg"
                       onClick={() => handleDeletePost(post._id)}
                     >
@@ -311,12 +346,12 @@ const Post = ({ post, refresh, isFeed }) => {
                         size={20}
                         color={iconColor}
                       />
-                    </button>
+                    </motion.button>
                   </>
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         </>
       ) : null}
     </>

@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { UploadImage } from "../utils/UploadImage";
 import CustomLoader from "../components/Loader/CustomLoader";
 import BlockUi from "@availity/block-ui";
+import { motion } from "framer-motion";
 function Home() {
   const iconColor = "rgb(55 65 81)";
   const { token } = useAuth();
@@ -67,12 +68,12 @@ function Home() {
 
   return (
     <>
-      <div className="lg:mx-72 mx-5 mt-5">
+      <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.3}} className="lg:mx-72 mx-5 mt-5">
         <BlockUi
           blocking={creatingPost}
           loader={<CustomLoader size={40} color="blue" />}
         >
-          <PostCreator refresh={getMyFeed} createPost={createPost} />
+          {!loadingFeed&&<PostCreator refresh={getMyFeed} createPost={createPost} />}
         </BlockUi>
         <div className="w-full flex flex-col items-center gap-8">
           {loadingFeed ? (
@@ -83,7 +84,7 @@ function Home() {
                 You don't have feed to view.
               </h1>
               <p className="mt-4 text-sm lg:text-base text-gray-500 text-center">
-                Start creating posts or start follwing users.
+                Start creating posts or follow users.
               </p>
             </div>
           ) : (
@@ -92,7 +93,7 @@ function Home() {
             ))
           )}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

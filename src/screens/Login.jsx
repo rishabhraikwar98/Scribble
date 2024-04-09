@@ -10,8 +10,8 @@ import Icon from "../components/Icon/Icon";
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import BlockUi from "@availity/block-ui";
-import Loading from "react-loading";
 import CustomLoader from "../components/Loader/CustomLoader";
+import { motion } from "framer-motion";
 function Login() {
   const iconColor = "rgb(55 65 81)";
   const [email, setEmail] = useState("");
@@ -54,95 +54,142 @@ function Login() {
       setLoading(false);
     }
   };
+  const errorAnimationVarients = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.3 },
+  };
 
   return (
     <>
-    <BlockUi blocking={loading} loader={<CustomLoader size={50} color={"blue"}/>}>
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="bg-white lg:p-8 px-8 py-6 lg:pb-3 pb-2 rounded-xl shadow-md lg:w-96 w-80 lg:mt-0 -mt-24">
-          <div className="flex justify-center">
-            <div className="w-[160px] mb-1.5">
-              <img src={logo1} alt="Company Logo" className="mx-auto" />
+      <BlockUi
+        blocking={loading}
+        loader={<CustomLoader size={50} color={"blue"} />}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="flex justify-center items-center min-h-screen bg-gray-100"
+        >
+          <div className="bg-white lg:p-8 px-8 py-6 lg:pb-3 pb-2 rounded-xl shadow-md lg:w-96 w-80 lg:mt-0 -mt-24">
+            <div className="flex justify-center">
+              <div className="w-[160px] mb-1.5">
+                <img src={logo1} alt="Company Logo" className="mx-auto" />
+              </div>
             </div>
-          </div>
-          <div className="mb-3">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-1"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              className={`w-full p-2 border-2 rounded-md focus:outline-none ${
-                emailError ? "border-red-600" : "border-gray-300"
-              }`}
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setEmailError(false);
-              }}
-            />
-            {emailError && (
-              <p className="text-xs text-right">Invalid email !</p>
-            )}
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-1"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <div className="relative">
+            <div className="mb-3">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-1"
+                htmlFor="email"
+              >
+                Email
+              </label>
               <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
+                id="email"
+                type="email"
+                placeholder="Enter your email"
                 className={`w-full p-2 border-2 rounded-md focus:outline-none ${
-                  passwordError ? "border-red-600" : "border-gray-300"
+                  emailError ? "border-red-600" : "border-gray-300"
                 }`}
-                value={password}
+                value={email}
                 onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError(false);
+                  setEmail(e.target.value);
+                  setEmailError(false);
                 }}
               />
-              <button
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute top-3 right-3"
-              >
-                {!showPassword && (
-                  <Icon color={iconColor} size={20} icon={LuEye} />
-                )}
-                {showPassword && (
-                  <Icon color={iconColor} size={20} icon={LuEyeOff} />
-                )}
-              </button>
+              {emailError && (
+                <motion.p
+                  initial="initial"
+                  animate="animate"
+                  transition="transition"
+                  exit="exit"
+                  variants={errorAnimationVarients}
+                  className="text-xs text-right"
+                >
+                  Invalid email !
+                </motion.p>
+              )}
             </div>
-            {passwordError && (
-              <p className="text-xs text-right">
-                Password must be 8 characters !
-              </p>
-            )}
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-1"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className={`w-full p-2 border-2 rounded-md focus:outline-none ${
+                    passwordError ? "border-red-600" : "border-gray-300"
+                  }`}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError(false);
+                  }}
+                />
+                <motion.button
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-3 right-3"
+                >
+                  {!showPassword && (
+                    <motion.div
+                      initial="initial"
+                      animate="animate"
+                      transition="transition"
+                      exit="exit"
+                      variants={errorAnimationVarients}
+                    >
+                      <Icon color={iconColor} size={20} icon={LuEye} />
+                    </motion.div>
+                  )}
+                  {showPassword && (
+                    <motion.div
+                      initial="initial"
+                      animate="animate"
+                      transition="transition"
+                      exit="exit"
+                      variants={errorAnimationVarients}
+                    >
+                      <Icon color={iconColor} size={20} icon={LuEyeOff} />
+                    </motion.div>
+                  )}
+                </motion.button>
+              </div>
+              {passwordError && (
+                <motion.p
+                  initial="initial"
+                  animate="animate"
+                  transition="transition"
+                  exit="exit"
+                  variants={errorAnimationVarients}
+                  className="text-xs text-right"
+                >
+                  Password must be 8 characters !
+                </motion.p>
+              )}
+            </div>
+            <motion.button
+              whileTap={{ scale: 0.96 }}
+              className="w-full bg-blue-500 text-white font-bold py-2 px-5 rounded-md focus:outline-none hover:bg-blue-600"
+              onClick={handleLogin}
+            >
+              Log In
+            </motion.button>
+            <p className="text-sm text-center my-4">
+              Don't have an account?{" "}
+              <NavLink to="/signup" className="text-blue-500">
+                Sign Up
+              </NavLink>
+            </p>
           </div>
-          <button
-            className="w-full bg-blue-500 text-white font-bold py-2 px-5 rounded-md focus:outline-none hover:bg-blue-600"
-            onClick={handleLogin}
-          >
-            Log In
-          </button>
-          <p className="text-sm text-center my-4">
-            Don't have an account?{" "}
-            <NavLink to="/signup" className="text-blue-500">
-              Sign Up
-            </NavLink>
-          </p>
-        </div>
-      </div>
-    </BlockUi>
+        </motion.div>
+      </BlockUi>
     </>
   );
 }

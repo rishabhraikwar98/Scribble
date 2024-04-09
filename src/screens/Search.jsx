@@ -9,6 +9,7 @@ import no_user from "../assets/no_user.png";
 import Loading from "react-loading";
 import { ProfileContext } from "../context/ProfileContext";
 import { useSearchParams } from "react-router-dom";
+import {motion} from "framer-motion"
 function Search() {
   let [searchParams, setSearchParams] = useSearchParams();
   const iconColor = "rgb(55 65 81)";
@@ -48,7 +49,7 @@ function Search() {
   return (
     <>
       <div className="search flex justify-center">
-        <div className="lg:w-5/12 w-11/12">
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.3}} className="lg:w-5/12 w-11/12">
           <div className="lg:mt-8 mt-6 lg:py-6 py-4 w-full">
             <p className="lg:text-4xl text-3xl text-gray-800 font-bold">
               Search
@@ -65,17 +66,20 @@ function Search() {
               }}
               type="text"
             />
-            {search&&<button onClick={()=>setSearch("")} className="absolute bg-gray-200 lg:p-1.5 p-1 rounded-full right-3 lg:top-4 top-3.5 shadow-md">
+            {search&&<motion.button initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.3}} onClick={()=>setSearch("")} className="absolute bg-gray-200 lg:p-1.5 p-1 rounded-full right-3 lg:top-4 top-3.5 shadow-md">
               <Icon icon={MdOutlineClear} size={16} color={iconColor} />
-            </button>}
+            </motion.button>}
           </div>
           {search && profiles.length ? (
-            <div className="people mt-10">
+            <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.3}} className="people mt-10">
               <p className="text-xl font-bold text-gray-900">People</p>
               <div className="results mt-5 px-1 overflow-y-auto max-h-[540px] lg:max-h-96">
                 {profiles.map((p,index) => {
                   return (
-                    <div
+                    <motion.div
+                    whileHover={{scale:.95}}
+                    whileTap={{scale:1}}
+                    transition={{duration:.1}}
                     key={index}
                       onClick={() => {
                         handleRedirect(p);
@@ -96,11 +100,11 @@ function Search() {
                           {p.name}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           ) : (
             ""
           )}
@@ -114,7 +118,7 @@ function Search() {
               <Loading type="bubbles" width={80} color={iconColor} />
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </>
   );

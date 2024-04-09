@@ -11,6 +11,7 @@ import Icon from "../components/Icon/Icon";
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import CustomLoader from "../components/Loader/CustomLoader";
+import { motion } from "framer-motion";
 function Signup() {
   const iconColor = "rgb(55 65 81)";
   const [email, setEmail] = useState("");
@@ -59,14 +60,28 @@ function Signup() {
       }, 500);
     } catch (error) {
       toast.error(error.response.data.message);
-      setLoading(false)
+      setLoading(false);
     }
+  };
+  const errorAnimationVarients = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.3 },
   };
 
   return (
     <>
-      <BlockUi blocking={loading} loader={<CustomLoader size={50} color={"blue"}/>}>
-        <div className="flex justify-center items-center h-screen bg-gray-100">
+      <BlockUi
+        blocking={loading}
+        loader={<CustomLoader size={50} color={"blue"} />}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="flex justify-center items-center h-screen bg-gray-100"
+        >
           <div className="bg-white lg:p-8 px-8 py-6 rounded-xl shadow-md lg:w-96 w-80 lg:mt-0 -mt-24">
             <div className="flex justify-center">
               <div className="w-[160px] mb-1.5">
@@ -94,7 +109,15 @@ function Signup() {
                 }}
               />
               {nameError && (
-                <p className="text-xs text-right">Name can't be blank!</p>
+                <motion.p
+                  initial="initial"
+                  animate="animate"
+                  transition="transition"
+                  exit="exit"
+                  className="text-xs text-right"
+                >
+                  Name can't be blank!
+                </motion.p>
               )}
             </div>
             <div className="mb-3">
@@ -118,7 +141,15 @@ function Signup() {
                 }}
               />
               {userNameError && (
-                <p className="text-xs text-right">User Name can't be blank!</p>
+                <motion.p
+                  initial="initial"
+                  animate="animate"
+                  transition="transition"
+                  exit="exit"
+                  className="text-xs text-right"
+                >
+                  User Name can't be blank!
+                </motion.p>
               )}
             </div>
             <div className="mb-3">
@@ -142,7 +173,15 @@ function Signup() {
                 }}
               />
               {emailError && (
-                <p className="text-xs text-right">Invalid email !</p>
+                <motion.p
+                  initial="initial"
+                  animate="animate"
+                  transition="transition"
+                  exit="exit"
+                  className="text-xs text-right"
+                >
+                  Invalid email !
+                </motion.p>
               )}
             </div>
 
@@ -172,25 +211,48 @@ function Signup() {
                   className="absolute top-3 right-3"
                 >
                   {!showPassword && (
-                    <Icon color={iconColor} size={20} icon={LuEye} />
+                    <motion.div
+                      initial="initial"
+                      animate="animate"
+                      transition="transition"
+                      exit="exit"
+                      variants={errorAnimationVarients}
+                    >
+                      <Icon color={iconColor} size={20} icon={LuEye} />
+                    </motion.div>
                   )}
                   {showPassword && (
-                    <Icon color={iconColor} size={20} icon={LuEyeOff} />
+                    <motion.div
+                      initial="initial"
+                      animate="animate"
+                      transition="transition"
+                      exit="exit"
+                      variants={errorAnimationVarients}
+                    >
+                      <Icon color={iconColor} size={20} icon={LuEyeOff} />
+                    </motion.div>
                   )}
                 </button>
               </div>
               {passwordError && (
-                <p className="text-xs text-right">
+                <motion.p
+                  initial="initial"
+                  animate="animate"
+                  transition="transition"
+                  exit="exit"
+                  className="text-xs text-right"
+                >
                   Password must be 8 characters !
-                </p>
+                </motion.p>
               )}
             </div>
-            <button
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               className="w-full bg-blue-500 text-white font-bold py-2 px-5 rounded-md focus:outline-none hover:bg-blue-600"
               onClick={handleSignup}
             >
               Sign Up
-            </button>
+            </motion.button>
             <p className="text-sm text-center mt-4">
               Already have an account?{" "}
               <NavLink to="/login" className="text-blue-500">
@@ -198,7 +260,7 @@ function Signup() {
               </NavLink>
             </p>
           </div>
-        </div>
+        </motion.div>
       </BlockUi>
     </>
   );

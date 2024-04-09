@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { API } from "../API/API";
 import BlockUi from "@availity/block-ui";
 import CustomLoader from "../components/Loader/CustomLoader";
+import {motion} from "framer-motion"
 function Settings() {
   const iconColor = "rgb(55 65 81)";
   const { myProfile, setMyProfile } = useContext(ProfileContext);
@@ -132,7 +133,7 @@ function Settings() {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen">
+      <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.3}} className="flex justify-center items-center min-h-screen">
         <div className="lg:w-5/12 w-11/12">
           <div className="lg:mt-8 mt-6 lg:py-6 py-4 w-full">
             <p className="lg:text-4xl text-3xl text-gray-800 font-bold">
@@ -174,13 +175,16 @@ function Settings() {
               <div className="profile-edit form">
                 <BlockUi blocking={block1} loader={<CustomLoader size={40} color="blue"/>}>
                   <div className="mb-1.5 flex justify-end">
-                    <button
+                    <motion.button
+                      whileHover={{scale:1.05}}
+                      whileTap={{scale:1}}
+                      transition={{duration:.1}}
                       onClick={() => setEditable(true)}
                       className="rounded-lg flex gap-1 px-4 py-1 bg-gray-800 text-white text-sm"
                     >
                       <p>Edit</p>
                       <Icon icon={LiaEdit} size={18} color={"white"} />
-                    </button>
+                    </motion.button>
                   </div>
                   <div className="flex flex-col mb-4">
                     <label className="font-medium mb-1">Name</label>
@@ -232,7 +236,7 @@ function Settings() {
                     />
                   </div>
                   {editable && (
-                    <div className="form action flex gap-8 mb-5">
+                    <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="form action flex gap-8 mb-5">
                       <button
                         onClick={updateProfile}
                         className="bg-blue-600 px-3 py-1.5 w-20 rounded-xl text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-700"
@@ -245,7 +249,7 @@ function Settings() {
                       >
                         Cancel
                       </button>
-                    </div>
+                    </motion.div>
                   )}
                 </BlockUi>
               </div>
@@ -270,7 +274,7 @@ function Settings() {
                   </button>
                 </div>
               ) : (
-                <div className="change password lg:w-1/2 w-full">
+                <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="change password lg:w-1/2 w-full">
                   <BlockUi blocking={block2} loader={<CustomLoader size={40} color="blue"/>}>
                     <div className="flex flex-col mb-4">
                       <label className="font-medium mb-1">
@@ -329,7 +333,7 @@ function Settings() {
                       </button>
                     </div>
                   </BlockUi>
-                </div>
+                </motion.div>
               )}
               <div className="flex lg:gap-52 gap-20 items-center mt-8">
                 <div>
@@ -343,7 +347,7 @@ function Settings() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

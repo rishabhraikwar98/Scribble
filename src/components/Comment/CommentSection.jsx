@@ -77,6 +77,7 @@ function CommentSection({ comments, refresh, postId, loadingComments }) {
           placeholder="Add a comment..."
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
+          onKeyDown={(e)=>e.key==="Enter"&&submitComment()}
         />
         <button
           type="submit"
