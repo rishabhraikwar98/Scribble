@@ -113,7 +113,7 @@ function UserProfile() {
     <>
       {/* Followers/Following Modal */}
       <Modal title={title} isOpen={showModal} onClose={closeModal}>
-        <BlockUi blocking={loading} loader={<CustomLoader size={40} color="blue" />}>
+        <BlockUi blocking={loading} >
           <div className="overflow-y-auto lg:max-h-96 max-h-80">
             <div>
               {title === "Followers" && !userProfile.followers.length ? (
