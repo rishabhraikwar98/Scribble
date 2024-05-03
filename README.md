@@ -3,7 +3,7 @@
 
 
 # Scribble
-A Simple functional social media platfrom where you can Share Photos, thoughts, memories of your life, explore people and posts.
+A Simple functional Micro-Blogginng platfrom where you can Share Photos, thoughts, memories of your life, explore people and posts.
 
 
 
