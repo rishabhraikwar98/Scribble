@@ -1,33 +1,32 @@
-//const base_url = "http://localhost:5000/api/v1";
-const base_url = "https://scribble-api-dbra.onrender.com/api/v1";
+const BASE_URL = process.env.REACT_APP_BASE_URL+"/api/v1";
 export const API = {
   Auth: {
-    login: base_url + "/auth/login", // POST
-    signup: base_url + "/auth/signup", // POST
-    changePassword: base_url+"/auth/change-password" // PATCH
+    login: BASE_URL + "/auth/login", // POST
+    signup: BASE_URL + "/auth/signup", // POST
+    changePassword: BASE_URL+"/auth/change-password" // PATCH
   },
-  Image_Upload: base_url + "/upload", // POST
+  Image_Upload: BASE_URL + "/upload", // POST
   Profile: {
-    myProfile: base_url + "/profile/me", // GET
-    updateMyProfile: base_url + "/profile/me", // PATCH
-    userProfile: base_url + "/profile/:userId", // GET
-    follow: base_url + "/profile/follow/:userId", // PATCH
-    unfollow: base_url + "/profile/unfollow/:userId", // PATCH
-    searchProfiles: base_url + "/profile/search", //GET
+    myProfile: BASE_URL + "/profile/me", // GET
+    updateMyProfile: BASE_URL + "/profile/me", // PATCH
+    userProfile: BASE_URL + "/profile/:userId", // GET
+    follow: BASE_URL + "/profile/follow/:userId", // PATCH
+    unfollow: BASE_URL + "/profile/unfollow/:userId", // PATCH
+    searchProfiles: BASE_URL + "/profile/search", //GET
   },
   Posts: {
-    allPosts: base_url + "/post/:userId/all", // GET
-    createNewPost: base_url + "/post", // POST
-    deletePost: base_url + "/post/:postId", // DELETE
-    editPost: base_url + "/post/:postId", // Patch
-    like: base_url + "/post/:postId/like", // POST | DELETE
+    allPosts: BASE_URL + "/post/:userId/all", // GET
+    createNewPost: BASE_URL + "/post", // POST
+    deletePost: BASE_URL + "/post/:postId", // DELETE
+    editPost: BASE_URL + "/post/:postId", // Patch
+    like: BASE_URL + "/post/:postId/like", // POST | DELETE
   },
   Comments: {
-    allComments: base_url + "/post/:postId/comment", //GET
-    addComment: base_url + "/post/:postId/comment", // POST
-    deleteComment: base_url + "/post/:postId/comment/:commentId", //DELETE
+    allComments: BASE_URL + "/post/:postId/comment", //GET
+    addComment: BASE_URL + "/post/:postId/comment", // POST
+    deleteComment: BASE_URL + "/post/:postId/comment/:commentId", //DELETE
   },
   Feed: {
-    getFeed: base_url + "/home/feed", //GET
+    getFeed: BASE_URL + "/home/feed", //GET
   },
 };
