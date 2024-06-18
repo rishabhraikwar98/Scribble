@@ -31,7 +31,7 @@ Server: https://github.com/rishabhraikwar98/Scribble-API
 - Commenting on posts
 - Liking posts and comments 
 - Following/unfollowing users
-- likes,Comments stats  
+- likes,Comments stats on posts.
  
 ## Technologies used
 
