@@ -3,8 +3,7 @@
 
 
 # Scribble
-A Simple functional Micro-Blogginng platfrom where you can Share Photos, thoughts, memories of your life, explore people and posts.
-
+A social platform built using the MERN stack. It allows users to sign up, create and manage profiles, search for other users, follow or unfollow them, and create posts. Users can also like and comment on posts, fostering interaction within the platform. The project integrates authentication and real-time content updates to provide a seamless user experience.
 
 
 ## Demo
